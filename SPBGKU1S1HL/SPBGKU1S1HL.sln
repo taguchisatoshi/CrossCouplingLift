@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32630.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{6989167D-11E4-40FE-8C1A-2192A86A7E90}") = "SPBGKU1S1HL", "SPBGKU1S1HL\SPBGKU1S1HL.vfproj", "{3EDBA4B4-8C4E-459A-A2A0-700474C62E7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3EDBA4B4-8C4E-459A-A2A0-700474C62E7B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3EDBA4B4-8C4E-459A-A2A0-700474C62E7B}.Debug|Win32.Build.0 = Debug|Win32
+		{3EDBA4B4-8C4E-459A-A2A0-700474C62E7B}.Debug|x64.ActiveCfg = Debug|x64
+		{3EDBA4B4-8C4E-459A-A2A0-700474C62E7B}.Debug|x64.Build.0 = Debug|x64
+		{3EDBA4B4-8C4E-459A-A2A0-700474C62E7B}.Release|Win32.ActiveCfg = Release|Win32
+		{3EDBA4B4-8C4E-459A-A2A0-700474C62E7B}.Release|Win32.Build.0 = Release|Win32
+		{3EDBA4B4-8C4E-459A-A2A0-700474C62E7B}.Release|x64.ActiveCfg = Release|x64
+		{3EDBA4B4-8C4E-459A-A2A0-700474C62E7B}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FD57A071-7F52-4B8A-9690-630D1178343A}
+	EndGlobalSection
+EndGlobal
