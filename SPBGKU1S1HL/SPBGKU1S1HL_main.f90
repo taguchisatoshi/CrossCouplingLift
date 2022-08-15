@@ -3,13 +3,17 @@
 !******************************************************************************************
     USE constants; USE coordinates; USE molecular_velocity; USE parameters
     USE counter; USE VDF; USE global; USE specifier; USE discontinuity
-    USE infinity; USE accel; USE trajectory; USE IO
+    USE infinity; USE trajectory; USE IO
     IMPLICIT NONE
     INTEGER :: sz
     CHARACTER :: name*99
     REAL(8) :: Ia, Ib, Ic, force_lift
     real(8) :: kn_tmp, kn0
     integer :: InputStatus
+    character :: file_u*128, file_s*128, char_tmp*999
+    logical :: exists
+    namelist /nlist/ kn0, n_unit
+
 !******************************************************************************************
       !PRINT*, 'ID for U and S'
       !READ(*,*) ID_u
@@ -23,12 +27,37 @@
       !ID_s = 9
       !ID_s = 14
 
-      Print*, 'kn ?'
-      read(*,*) kn0
-      open(unit=10, file='ID_list.txt', status='old')
+
+    open(unit=10, file='input.txt')
+      read(10, nml=nlist)
+    close(10)
+
+      !Print*, 'kn ?'
+      !read(*,*) kn0, n_unit
+      print*, kn0
+      
+      !print*, 'n_unit ?'
+      !read(*,*) n_unit
+      print*, n_unit
+
+      WRITE(ID_u_char,*) n_unit
+      file_u = 'H:/work2/SPBGK/20220604_SPES20U1M/ID_list_summary_n'//TRIM(ADJUSTL(ID_u_char))//'.txt'
+      inquire (file = file_u, exist = exists)
+      if (.not. exists) then
+        write (*,'(2a/)') ' >> cannot find file ', file_u
+        stop
+      end if
+    
+      !print*, file_u
+      open(unit=10, file=file_u, status='old')
+        read(10,*) char_tmp
+        read(10,*) char_tmp
         do
-          read(10,*,IOSTAT=InputStatus) kn_tmp, ID_u, ID_s
+          read(10,*,IOSTAT=InputStatus) ID_u, kn_tmp
           if (kn_tmp == kn0) then
+            WRITE(ID_u_char,*) ID_u
+            dir_u = 'H:/work2/SPBGK/20220604_SPES20U1M/ID'//TRIM(ADJUSTL(ID_u_char))
+            print*, dir_u
             exit
           elseif (InputStatus < 0) then
             print*, 'No more data'
@@ -37,12 +66,38 @@
         enddo
       close(10)
 
-    pi = 4.d0*ATAN(1.d0)
+      WRITE(ID_s_char,*) n_unit
+      file_s = 'H:/work2/SPBGK/SPBGK20S1M/ID_list_summary_n'//TRIM(ADJUSTL(ID_s_char))//'.txt'
+      inquire (file = file_s, exist = exists)
+      if (.not. exists) then
+        write (*,'(2a/)') ' >> cannot find file ', file_s
+        stop
+      end if
 
-    WRITE(ID_u_char,*) ID_u
-    dir_u = 'H:/work2/SPBGK/SPBGK20U1/ID'//TRIM(ADJUSTL(ID_u_char))
-    WRITE(ID_s_char,*) ID_s
-    dir_s = 'H:/work2/SPBGK/SPBGK20S1/ID'//TRIM(ADJUSTL(ID_s_char))
+      !print*, trim(file_s)
+      open(unit=10, file=file_s, status='old')
+        read(10,*) char_tmp
+        read(10,*) char_tmp
+        do
+          read(10,*,IOSTAT=InputStatus) ID_s, kn_tmp
+          if (kn_tmp == kn0) then
+            WRITE(ID_s_char,*) ID_s
+            dir_s = 'H:/work2/SPBGK/SPBGK20S1M/ID'//TRIM(ADJUSTL(ID_s_char))
+            print*, dir_s
+            exit
+          elseif (InputStatus < 0) then
+            print*, 'No more data'
+            stop
+          endif
+        enddo
+      close(10)
+
+      pi = 4.d0*ATAN(1.d0)
+
+    !WRITE(ID_u_char,*) ID_u
+    !dir_u = 'H:/work2/SPBGK/20220604_SPES20U1M/ID'//TRIM(ADJUSTL(ID_u_char))
+    !WRITE(ID_s_char,*) ID_s
+    !dir_s = 'H:/work2/SPBGK/SPBGK20S1M/ID'//TRIM(ADJUSTL(ID_s_char))
     
     name = TRIM(dir_u)//'/log_BIN.dat'
     name = trim(name)
@@ -52,8 +107,8 @@
       READ(10) kn_u, number_unit_u, L_r_u, imax1_u, M_ref_u, M_z_u, M_z_th_u, &
               order_ipl_u, order_fd_u, step_out_u, IDfm_u, ID_dsc_u, ID_inf_u, conc_u, &
               n_crit_conv_u, step_add_conv_u, ID_dev_u, ID_dev_level_u, &
-              coeff_under_inf_u, ID_aitken_u, step_aitken_u, d1g_u, d2g_u, d3g_u, &
-              ID_es_u, nu_u, ID_dev_noneq_u
+              coeff_under_inf_u, d1g_u, d2g_u, d3g_u, &
+              ID_es_u, nu_u, ID_dev_noneq_u, accommo_u
 
     WRITE(*,*) 'Data read from ... ', trim(name)
 
@@ -62,11 +117,21 @@
     OPEN(UNIT=10, STATUS='OLD', FILE=name, FORM='UNFORMATTED')
 
       INQUIRE (FILE = name, SIZE = sz) ! get the file size
-      READ(10) kn_s, number_unit_s, L_r_s, imax1_s, M_ref_s, M_z_s, M_z_th_s, &
-              order_ipl_s, order_fd_s, step_out_s, IDfm_s, ID_dsc_s, ID_dsc_analyt_s, &
-              ID_inf_s, conc_s, n_crit_conv_s, step_add_conv_s, ID_dev_s, ID_dev_level_s, &
-              coeff_under_inf_s, d1g_s, d2g_s, d3g_s, &
-              ID_es_s, nu_s, ID_dev_noneq_s
+      if (sz == 138) then
+        READ(10) kn_s, number_unit_s, L_r_s, imax1_s, M_ref_s, M_z_s, M_z_th_s, &
+                order_ipl_s, order_fd_s, step_out_s, IDfm_s, ID_dsc_s, ID_dsc_analyt_s, &
+                ID_inf_s, conc_s, n_crit_conv_s, step_add_conv_s, ID_dev_s, ID_dev_level_s, &
+                coeff_under_inf_s, d1g_s, d2g_s, d3g_s, &
+                ID_es_s, nu_s, ID_dev_noneq_s, accommo_s, grid_conc_z_th_nw
+      endif
+      if (sz < 138) then
+        READ(10) kn_s, number_unit_s, L_r_s, imax1_s, M_ref_s, M_z_s, M_z_th_s, &
+                order_ipl_s, order_fd_s, step_out_s, IDfm_s, ID_dsc_s, ID_dsc_analyt_s, &
+                ID_inf_s, conc_s, n_crit_conv_s, step_add_conv_s, ID_dev_s, ID_dev_level_s, &
+                coeff_under_inf_s, d1g_s, d2g_s, d3g_s, &
+                ID_es_s, nu_s, ID_dev_noneq_s, accommo_s
+        grid_conc_z_th_nw = 0.d0
+      endif
     CLOSE(10)
 
     WRITE(*,*) 'Data read from ... ', trim(name)
@@ -160,23 +225,23 @@
 
     name = TRIM(dir_u)//'/force_lift.dat'
     name = trim(name)
-
+    
     WRITE(*,*) 'Data written to ... ', TRIM(name)
     OPEN(UNIT=10, STATUS='unknown', FILE=name)
       WRITE(10,*) force_lift
     CLOSE(10)
-
+    
     name = TRIM(dir_u)//'/force_lift_BIN.dat'
     name = TRIM(name)
-
+    
     WRITE(*,*) 'Data written to ... ', TRIM(name)
     OPEN(UNIT=10, FILE=name, FORM='UNFORMATTED')
       WRITE(10) force_lift, Ia, Ib, Ic
     CLOSE(10)
-
+    
     name = TRIM(dir_u)//'/force_lift.txt'
     name = TRIM(name)
-
+    
     WRITE(*,*) 'Data written to ... ', TRIM(name)
     OPEN(UNIT=10, STATUS='unknown', FILE=name)
       WRITE(10,*) real(kn), real(force_lift), real(Ia+Ib), real(Ic)

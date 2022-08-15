@@ -2,7 +2,7 @@
     SUBROUTINE summary
 !*****************************************************************************************
     USE global; USE constants; USE coordinates; USE molecular_velocity; USE parameters
-    USE counter; USE specifier; USE infinity; USE accel
+    USE counter; USE specifier; USE infinity
     IMPLICIT NONE
 !*****************************************************************************************
     PRINT*, REPEAT('=', 72)
@@ -29,6 +29,7 @@
     IF (ID_es_u == ID_es_s) THEN; ID_es = ID_es_u; ELSE; STOP; ENDIF
     IF (nu_u == nu_s) THEN; nu = nu_u; ELSE; STOP; ENDIF
     IF (ID_dev_noneq_u == ID_dev_noneq_s) THEN; ID_dev_noneq = ID_dev_noneq_u; ELSE; STOP; ENDIF
+    IF (accommo_u == accommo_s) THEN; accommo = accommo_u; ELSE; STOP; ENDIF
 
     ID_dsc_analyt = ID_dsc_analyt_s
 
@@ -64,6 +65,7 @@
     WRITE(*,*) '* d1, d2, d3 : ', real(d1g), real(d2g), real(d3g)
     WRITE(*,*) '* ES MODEL: ', ID_es
     IF (ID_es == 1) WRITE(*,*) '* nu: ', nu
+    WRITE(*,*) '* Accommodation coefficient: ', accommo
     WRITE(*,*)
 !*****************************************************************************************
     END SUBROUTINE summary

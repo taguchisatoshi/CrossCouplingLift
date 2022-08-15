@@ -55,7 +55,7 @@
 !*****************************************************************************************
       SUBROUTINE grid_cyl_r1
 !*****************************************************************************************
-      USE coordinates; USE constants; USE MPI_global
+      USE coordinates; USE constants
       IMPLICIT NONE
       INTEGER :: i
       REAL(8) :: r_min, r_max, radius, dr_tmp
@@ -289,7 +289,7 @@
 !*****************************************************************************************
     SUBROUTINE simpson_z2(M_z0,M_z1,M_z_th,weight,f,S)
 !*****************************************************************************************
-    USE MPI_global
+    !USE MPI_global
     IMPLICIT NONE
     INTEGER, INTENT(IN) :: M_z0, M_z1, M_z_th
     REAL(8), INTENT(IN) :: weight(M_z0:M_z1), f(M_z0:M_z1,0:M_z_th)
@@ -299,8 +299,8 @@
     IF (MOD(M_z1-M_z0,2) /= 0) THEN
       PRINT*, 'Error -- (simpson_z)'
       PRINT*, 'Invalid number of subdivisions'
-      CALL MPI_ABORT(MPI_COMM_WORLD,9,ierr)
-      CALL MPI_FINALIZE(ierr)
+      !CALL MPI_ABORT(MPI_COMM_WORLD,9,ierr)
+      !CALL MPI_FINALIZE(ierr)
       STOP
     ENDIF
 
@@ -343,7 +343,7 @@
 !*****************************************************************************************
     SUBROUTINE simpson(M_bgn,M_end,weight,f,S)
 !*****************************************************************************************
-    USE MPI_global
+    !USE MPI_global
     IMPLICIT NONE
     INTEGER, INTENT(IN) :: M_bgn, M_end
     REAL(8), INTENT(IN) :: weight(M_bgn:M_end), f(M_bgn:M_end)
@@ -353,8 +353,8 @@
     IF (MOD(M_end-M_bgn,2) /= 0) THEN
       PRINT*, 'Error -- (simpson)'
       PRINT*, 'Invalid number of subdivisions'
-      CALL MPI_ABORT(MPI_COMM_WORLD,9,ierr)
-      CALL MPI_FINALIZE(ierr)
+      !CALL MPI_ABORT(MPI_COMM_WORLD,9,ierr)
+      !CALL MPI_FINALIZE(ierr)
       STOP
     ENDIF
 
