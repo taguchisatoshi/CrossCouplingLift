@@ -281,7 +281,6 @@
     ELSEIF (xp < f(istart)-epsilon .OR. xp > f(iend)+epsilon) THEN
       WRITE(*,*) 'Error -- (search)'
       WRITE(*,*) xp
-      PAUSE
       STOP
     ENDIF
           

@@ -61,7 +61,7 @@
     WRITE(*,*) '* Discontinuity: ', ID_dsc
     WRITE(*,*) '* Connecting to the asymptotic solution for large r: ', ID_inf
     WRITE(*,*) '* Solve the deviation: ', ID_dev
-    WRITE(*,*) '* d1, d2, d3 : ', SNGL(d1g), SNGL(d2g), SNGL(d3g)
+    WRITE(*,*) '* d1, d2, d3 : ', real(d1g), real(d2g), real(d3g)
     WRITE(*,*) '* ES MODEL: ', ID_es
     IF (ID_es == 1) WRITE(*,*) '* nu: ', nu
     WRITE(*,*)
@@ -82,7 +82,7 @@
     name = TRIM(name)
 
     OPEN(UNIT=10, FILE = name, STATUS = 'OLD', &
-      FORM='UNFORMATTED', CONVERT='LITTLE_ENDIAN')
+      FORM='UNFORMATTED')
       READ(10) rho1_u, u1_r_u, u1_th_u, t1_u, p1_u, &
                st1_rr_u, st1_rth_u, st1_thth_u, st1_phph_u, q1_r_u, q1_th_u, &
                sigma1_u, &
@@ -106,17 +106,17 @@
     name = TRIM(name)
 
     WRITE(*,*) 'Data read from ... ', TRIM(name)
-    OPEN(UNIT=10, FILE=name, STATUS='OLD', FORM='UNFORMATTED', CONVERT='LITTLE_ENDIAN')
+    OPEN(UNIT=10, FILE=name, STATUS='OLD', FORM='UNFORMATTED')
       READ(10) c1_inf, c2_inf, c3_inf
     CLOSE(10)
     
-    WRITE(*,'(X,A,3ES14.5)') '(c1,c2,c3)=', c1_inf(1), c2_inf(1), c3_inf(1)
+    WRITE(*,'(1X,A,3ES14.5)') '(c1,c2,c3)=', c1_inf(1), c2_inf(1), c3_inf(1)
 
     name = trim(dir_u)//'/const_inf_dist_BIN.dat'
     name = TRIM(name)
 
     WRITE(*,*) 'Data read from ... ', TRIM(name)
-    OPEN(UNIT=10, FILE=name, STATUS='OLD', FORM='UNFORMATTED', CONVERT='LITTLE_ENDIAN')
+    OPEN(UNIT=10, FILE=name, STATUS='OLD', FORM='UNFORMATTED')
       READ(10) c1, c2, c3
     CLOSE(10)
 
@@ -137,7 +137,7 @@
     name = TRIM(name)
 
     WRITE(*,*) 'Data read from ... ', TRIM(name)
-    OPEN(UNIT=10, FILE=name, FORM='UNFORMATTED', CONVERT='LITTLE_ENDIAN')
+    OPEN(UNIT=10, FILE=name, FORM='UNFORMATTED')
       READ(10) G1_ne_u, G1_nw_u, H1_ne_u, H1_nw_u
     CLOSE(10)
 
@@ -145,7 +145,7 @@
     name = TRIM(name)
 
     WRITE(*,*) 'Data read from ... ', TRIM(name)
-    OPEN(UNIT=10, FILE=name, FORM='UNFORMATTED', CONVERT='LITTLE_ENDIAN')
+    OPEN(UNIT=10, FILE=name, FORM='UNFORMATTED')
       READ(10) G1_dsc_u, H1_dsc_u, dG1_dsc_u, dH1_dsc_u
     CLOSE(10)
 
@@ -153,7 +153,7 @@
     name = TRIM(name)
 
     WRITE(*,*) 'Data read from ... ', TRIM(name)
-    OPEN(UNIT=10, FILE=name, FORM='UNFORMATTED', CONVERT='LITTLE_ENDIAN')
+    OPEN(UNIT=10, FILE=name, FORM='UNFORMATTED')
       READ(10) G1_dsc_trj_u, H1_dsc_trj_u, dG1_dsc_trj_u, dH1_dsc_trj_u
     CLOSE(10)
 
@@ -173,8 +173,7 @@
     name = TRIM(dir_s)//'/macro_s_BIN.dat'
     name = TRIM(name)
 
-    OPEN(UNIT=10, FILE=name, STATUS = 'OLD', &
-         FORM='UNFORMATTED', CONVERT='LITTLE_ENDIAN')
+    OPEN(UNIT=10, FILE=name, STATUS = 'OLD', FORM='UNFORMATTED')
       READ(10) u1_ph_s, st1_rph_s, q1_ph_s, &
                step_s
     CLOSE(10)
@@ -196,17 +195,17 @@
     name = TRIM(name)
 
     WRITE(*,*) 'Data read from ... ', TRIM(name)
-    OPEN(UNIT=10, FILE=name, STATUS='OLD', FORM='UNFORMATTED', CONVERT='LITTLE_ENDIAN')
+    OPEN(UNIT=10, FILE=name, STATUS='OLD', FORM='UNFORMATTED')
       READ(10) c4_inf
     CLOSE(10)
     
-    WRITE(*,'(X,A,1ES14.5)') 'c4 =', c4_inf(1)
+    WRITE(*,'(1X,A,1ES14.5)') 'c4 =', c4_inf(1)
 
     name = trim(dir_s)//'/const_inf_dist_s_BIN.dat'
     name = TRIM(name)
 
     WRITE(*,*) 'Data read from ... ', TRIM(name)
-    OPEN(UNIT=10, FILE=name, STATUS='OLD', FORM='UNFORMATTED', CONVERT='LITTLE_ENDIAN')
+    OPEN(UNIT=10, FILE=name, STATUS='OLD', FORM='UNFORMATTED')
       READ(10) c4
     CLOSE(10)
 
@@ -229,7 +228,7 @@
     name = TRIM(name)
 
     WRITE(*,*) 'Data read from ... ', TRIM(name)
-    OPEN(UNIT=10, FILE=name, FORM='UNFORMATTED', CONVERT='LITTLE_ENDIAN')
+    OPEN(UNIT=10, FILE=name, FORM='UNFORMATTED')
       READ(10) G1_ne_s, G1_nw_s
     CLOSE(10)
 
@@ -237,7 +236,7 @@
     name = TRIM(name)
 
     WRITE(*,*) 'Data read from ... ', TRIM(name)
-    OPEN(UNIT=10, FILE=name, FORM='UNFORMATTED', CONVERT='LITTLE_ENDIAN')
+    OPEN(UNIT=10, FILE=name, FORM='UNFORMATTED')
       READ(10) G1_dsc_s, dG1_dsc_s
     CLOSE(10)
 
@@ -245,7 +244,7 @@
     name = TRIM(name)
 
     WRITE(*,*) 'Data read from ... ', TRIM(name)
-    OPEN(UNIT=10, FILE=name, FORM='UNFORMATTED', CONVERT='LITTLE_ENDIAN')
+    OPEN(UNIT=10, FILE=name, FORM='UNFORMATTED')
       READ(10) G1_dsc_trj_s, dG1_dsc_trj_s
     CLOSE(10)
 

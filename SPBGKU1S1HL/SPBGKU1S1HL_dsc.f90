@@ -5,7 +5,7 @@
     IMPLICIT NONE
     INTEGER :: i, m, l
     LOGICAL :: exist
-    REAL*8 :: epsilon
+    REAL(8) :: epsilon
     REAL(8) :: r_add(M_z_th-1), z_th_add(M_z_th-1)
 !*****************************************************************************************
     epsilon = 1d-12
@@ -28,7 +28,7 @@
         ENDIF
       ENDDO
       
-      IF (exist == .FALSE. .AND. r_add(i) < MAXVAL(r1)) THEN
+      IF ((exist .eqv. .FALSE.) .AND. (r_add(i) < MAXVAL(r1))) THEN
         n_trj = n_trj + 1
         r_trj(n_trj) = r_add(i)
         z_th_trj(n_trj) = z_th_add(i)
@@ -73,8 +73,8 @@
     IMPLICIT NONE
     INTEGER :: i, j
     INTEGER, INTENT(IN) :: nn
-    REAL*8, INTENT(INOUT) :: func(0:nn), func2(0:nn), func3(0:nn)
-    REAL*8 :: tmp
+    REAL(8), INTENT(INOUT) :: func(0:nn), func2(0:nn), func3(0:nn)
+    REAL(8) :: tmp
 !*****************************************************************************************
     DO i = nn, 1, -1
       DO j = 0, i-1

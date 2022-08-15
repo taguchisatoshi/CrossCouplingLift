@@ -474,7 +474,7 @@
     REAL(8), INTENT(OUT) :: Ib
     REAL(8) :: fa, fb, fc, fd
     REAL(8) :: fa_ne, fb_ne, fc_ne, fa_nw, fb_nw, fc_nw
-    CHARACTER*2 :: ID_dir
+    CHARACTER :: ID_dir*2
     INTEGER :: i
 !*****************************************************************************************
     gamma1 = 1.d0

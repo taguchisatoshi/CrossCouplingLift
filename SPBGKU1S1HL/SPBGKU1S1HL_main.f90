@@ -46,7 +46,7 @@
     
     name = TRIM(dir_u)//'/log_BIN.dat'
     name = trim(name)
-    OPEN(UNIT=10, STATUS='OLD', FILE=name, FORM='UNFORMATTED', CONVERT='LITTLE_ENDIAN')
+    OPEN(UNIT=10, STATUS='OLD', FILE=name, FORM='UNFORMATTED')
 
       INQUIRE (FILE = name, SIZE = sz) ! get the file size
       READ(10) kn_u, number_unit_u, L_r_u, imax1_u, M_ref_u, M_z_u, M_z_th_u, &
@@ -59,7 +59,7 @@
 
     name = TRIM(dir_s)//'/log_s_BIN.dat'
     name = trim(name)
-    OPEN(UNIT=10, STATUS='OLD', FILE=name, FORM='UNFORMATTED', CONVERT='LITTLE_ENDIAN')
+    OPEN(UNIT=10, STATUS='OLD', FILE=name, FORM='UNFORMATTED')
 
       INQUIRE (FILE = name, SIZE = sz) ! get the file size
       READ(10) kn_s, number_unit_s, L_r_s, imax1_s, M_ref_s, M_z_s, M_z_th_s, &
@@ -155,7 +155,7 @@
     force_lift = Ia + Ib + Ic
 
     write(*,*)
-    print*, 'hl: ', sngl(force_lift), 'Ia+Ib: ', sngl(Ia + Ib), 'Ic: ', sngl(Ic)
+    print*, 'hl: ', real(force_lift), 'Ia+Ib: ', real(Ia + Ib), 'Ic: ', real(Ic)
     write(*,*)
 
     name = TRIM(dir_u)//'/force_lift.dat'
@@ -170,7 +170,7 @@
     name = TRIM(name)
 
     WRITE(*,*) 'Data written to ... ', TRIM(name)
-    OPEN(UNIT=10,FILE=name,FORM='UNFORMATTED',CONVERT='LITTLE_ENDIAN')
+    OPEN(UNIT=10, FILE=name, FORM='UNFORMATTED')
       WRITE(10) force_lift, Ia, Ib, Ic
     CLOSE(10)
 
@@ -179,7 +179,7 @@
 
     WRITE(*,*) 'Data written to ... ', TRIM(name)
     OPEN(UNIT=10, STATUS='unknown', FILE=name)
-      WRITE(10,*) sngl(kn), sngl(force_lift), sngl(Ia+Ib), sngl(Ic)
+      WRITE(10,*) real(kn), real(force_lift), real(Ia+Ib), real(Ic)
     CLOSE(10)
 !******************************************************************************************
     END PROGRAM main

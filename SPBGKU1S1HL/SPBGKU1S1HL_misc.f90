@@ -41,8 +41,8 @@
 !*****************************************************************************************
     IMPLICIT NONE
     INTEGER :: date_time(8)
-    CHARACTER*8 :: date
-    CHARACTER*10 char_time
+    CHARACTER :: date*8
+    CHARACTER :: char_time*10
 !*****************************************************************************************
     CALL DATE_AND_TIME (DATE=date,TIME=char_time,values=date_time)
     WRITE(*,11) ' Time: ', date_time(5), ':', date_time(6), ':', date_time(7), &
@@ -91,8 +91,8 @@
 !*****************************************************************************************
     IMPLICIT NONE
     INTEGER :: i,j
-    REAL(8) :: M(0:n,0:n)
     INTEGER, INTENT(IN) :: n  !    n-th polynomial is to be used.
+    REAL(8) :: M(0:n,0:n)
     REAL(8), INTENT(IN) :: x(0:n), f(0:n)
     REAL(8), INTENT(OUT) :: slope(n)
 !*****************************************************************************************    

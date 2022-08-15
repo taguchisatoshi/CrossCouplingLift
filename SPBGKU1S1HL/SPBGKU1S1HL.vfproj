@@ -25,7 +25,7 @@
 				<Tool Name="VFPostBuildEventTool"/>
 				<Tool Name="VFManifestTool" SuppressStartupBanner="true"/></Configuration>
 		<Configuration Name="Debug|x64">
-				<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" Optimization="optimizeDisabled" AdditionalIncludeDirectories="C:\Program Files\MPICH2\include" WarnUnusedVariables="true" WarnInterfaces="true" Traceback="true" BoundsCheck="true" RuntimeLibrary="rtMultiThreadedDebug" Interfaces="true"/>
+				<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" Optimization="optimizeDisabled" AdditionalIncludeDirectories="C:\Program Files\MPICH2\include" StandardWarnings="standardWarningsF18" WarnUnusedVariables="true" WarnInterfaces="true" Traceback="true" BoundsCheck="true" RuntimeLibrary="rtMultiThreadedDebug" Interfaces="true"/>
 				<Tool Name="VFLinkerTool" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" AdditionalLibraryDirectories="c:\Program Files\MPICH2\lib" GenerateDebugInformation="true" SubSystem="subSystemConsole" AdditionalDependencies="cxx.lib mpi.lib fmpich2.lib"/>
 				<Tool Name="VFResourceCompilerTool"/>
 				<Tool Name="VFMidlTool" SuppressStartupBanner="true" TargetEnvironment="midlTargetAMD64"/>
@@ -47,13 +47,13 @@
 	<Files>
 		<Filter Name="ソースファイル" Filter="f90;for;f;fpp;ftn;def;odl;idl">
 		<File RelativePath=".\SPBGKU1S1HL_dsc.f90"/>
-		<File RelativePath=".\SPBGKU1S1HL_integral_210918.f90"/>
-		<File RelativePath=".\SPBGKU1S1HL_IO_160407.f90"/>
-		<File RelativePath=".\SPBGKU1S1HL_macro_150806.f90"/>
-		<File RelativePath=".\SPBGKU1S1HL_main_200708.f90"/>
-		<File RelativePath=".\SPBGKU1S1HL_misc_140903.f90"/>
-		<File RelativePath=".\SPBGKU1S1HL_module_151211.f90"/>
-		<File RelativePath=".\SPBGKU1S1HL_routines_151211.f90"/></Filter>
+		<File RelativePath=".\SPBGKU1S1HL_integral.f90"/>
+		<File RelativePath=".\SPBGKU1S1HL_IO.f90"/>
+		<File RelativePath=".\SPBGKU1S1HL_macro.f90"/>
+		<File RelativePath=".\SPBGKU1S1HL_main.f90"/>
+		<File RelativePath=".\SPBGKU1S1HL_misc.f90"/>
+		<File RelativePath=".\SPBGKU1S1HL_module.f90"/>
+		<File RelativePath=".\SPBGKU1S1HL_routines.f90"/></Filter>
 		<Filter Name="ヘッダーファイル" Filter="fi;fd"/>
 		<Filter Name="リソースファイル" Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"/>
 		<File RelativePath=".\ReadMe.txt"/></Files>

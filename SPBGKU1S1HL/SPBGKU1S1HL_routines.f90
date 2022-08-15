@@ -377,10 +377,10 @@
 !*****************************************************************************************
     IMPLICIT NONE
     INTEGER, INTENT(IN) :: order
-    REAL*8, INTENT(IN) :: x(0:order)
-    REAL*8, INTENT(IN) :: rho(0:order), u(0:order), v(0:order), t(0:order)
-    REAL*8, INTENT(IN) :: xp
-    REAL*8, INTENT(OUT) :: res_rho, res_u, res_v, res_t
+    REAL(8), INTENT(IN) :: x(0:order)
+    REAL(8), INTENT(IN) :: rho(0:order), u(0:order), v(0:order), t(0:order)
+    REAL(8), INTENT(IN) :: xp
+    REAL(8), INTENT(OUT) :: res_rho, res_u, res_v, res_t
 !*****************************************************************************************
     CALL interpolation_1d(order,x,rho,xp,res_rho)
     CALL interpolation_1d(order,x,u,xp,res_u)
@@ -399,12 +399,12 @@
 !*****************************************************************************************
     IMPLICIT NONE
     INTEGER, INTENT(IN) :: order
-    REAL*8, INTENT(IN) :: x(0:order)
-    REAL*8, INTENT(IN) :: rho(0:order), u(0:order), v(0:order), stxx(0:order), &
+    REAL(8), INTENT(IN) :: x(0:order)
+    REAL(8), INTENT(IN) :: rho(0:order), u(0:order), v(0:order), stxx(0:order), &
                            stxy(0:order), styy(0:order), stzz(0:order), &
                            qx(0:order), qy(0:order)
-    REAL*8, INTENT(IN) :: xp
-    REAL*8, INTENT(OUT) :: res_rho, res_u, res_v, res_stxx, res_stxy, res_styy, &
+    REAL(8), INTENT(IN) :: xp
+    REAL(8), INTENT(OUT) :: res_rho, res_u, res_v, res_stxx, res_stxy, res_styy, &
                             res_stzz, res_qx, res_qy
 !*****************************************************************************************
     CALL interpolation_1d(order,x,rho,xp,res_rho)
