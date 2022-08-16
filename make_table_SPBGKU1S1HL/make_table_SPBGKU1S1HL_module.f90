@@ -90,6 +90,7 @@
     REAL(8) :: kn ! -- Knudsen number
     REAL(8) :: nu ! -- Controle parameter of the Prandtl number in ES model
     REAL(8) :: prandtl
+    real(8) :: accommo ! -- Accommodation coefficient in the Maxwell's BC
 !*****************************************************************************************
     END MODULE constants
 !*****************************************************************************************
@@ -189,26 +190,26 @@
 
 
 !*****************************************************************************************
-    MODULE MPI_global
+!    MODULE MPI_global
 !*****************************************************************************************
-    IMPLICIT NONE
-    INTEGER :: ierr, nprocs, myrank
-    INTEGER, ALLOCATABLE :: k_bgn_MPI(:), k_end_MPI(:)
-    REAL(8), ALLOCATABLE :: QSUM1(:)
-    INTEGER :: ISUMR8
-    INCLUDE 'mpif.h'
+!    IMPLICIT NONE
+!    INTEGER :: ierr, nprocs, myrank
+!    INTEGER, ALLOCATABLE :: k_bgn_MPI(:), k_end_MPI(:)
+!    REAL(8), ALLOCATABLE :: QSUM1(:)
+!    INTEGER :: ISUMR8
+!    INCLUDE 'mpif.h'
 !*****************************************************************************************
-    END MODULE MPI_global
+!    END MODULE MPI_global
 !*****************************************************************************************
-
-
+!
+!
 !*****************************************************************************************
-    MODULE MPI_input
+!    MODULE MPI_input
 !*****************************************************************************************
-    IMPLICIT NONE
-    CHARACTER :: filename_MPI
+!    IMPLICIT NONE
+!    CHARACTER :: filename_MPI
 !*****************************************************************************************
-    END MODULE MPI_input
+!    END MODULE MPI_input
 !*****************************************************************************************
 
 
@@ -253,7 +254,6 @@
     ELSEIF (xp < f(istart)-epsilon .OR. xp > f(iend)+epsilon) THEN
       WRITE(*,*) 'Error -- (search)'
       WRITE(*,*) xp
-      PAUSE
       STOP
     ENDIF
           
@@ -336,17 +336,6 @@
 
 
 
-!*****************************************************************************************
-    MODULE accel
-!*****************************************************************************************
-    IMPLICIT NONE
-    INTEGER :: step_aitken, count_aitken
-!*****************************************************************************************
-    END MODULE accel
-!*****************************************************************************************
-
-
-
 
 
 !*****************************************************************************************
@@ -354,9 +343,9 @@
 !*****************************************************************************************
     implicit none
     type ID_unit
-      character*4 :: ID_name
+      character :: ID_name*4
       ! log_BIN
-      real(8) :: kn, conc, dr1_min, dr1_max, coeff_under_inf, d1g, d2g, d3g
+      real(8) :: kn, conc, dr1_min, dr1_max, coeff_under_inf, d1g, d2g, d3g, accommo
       integer :: L_r, number_unit, imax1, M_ref, M_z, M_z_th, ID_dev_level, order_fd, &
                  order_ipl, n_crit_conv, step_add_conv, step_aitken, step_out, &
                  ID_es
@@ -375,6 +364,8 @@
     
     integer :: n_ID
 
+    integer :: n_unit
+    character :: ID_u_char*99, accommo_char*99
 !*****************************************************************************************
     END MODULE type_list
 !*****************************************************************************************
