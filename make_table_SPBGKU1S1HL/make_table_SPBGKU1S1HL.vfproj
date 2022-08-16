@@ -46,9 +46,9 @@
 				<Tool Name="VFManifestTool" SuppressStartupBanner="true"/></Configuration></Configurations>
 	<Files>
 		<Filter Name="ソースファイル" Filter="f90;for;f;fpp;ftn;def;odl;idl">
-		<File RelativePath=".\make_table_SPBGKU1S1HL_160422.f90"/>
-		<File RelativePath=".\make_table_SPBGKU1S1HL_module_160422.f90"/>
-		<File RelativePath=".\make_table_SPBGKU1S1HL_ptr_210927.f90"/></Filter>
+		<File RelativePath=".\make_table_SPBGKU1S1HL.f90"/>
+		<File RelativePath=".\make_table_SPBGKU1S1HL_module.f90"/>
+		<File RelativePath=".\make_table_SPBGKU1S1HL_ptr.f90"/></Filter>
 		<Filter Name="ヘッダーファイル" Filter="fi;fd"/>
 		<Filter Name="リソースファイル" Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"/>
 		<File RelativePath=".\ReadMe.txt"/></Files>
