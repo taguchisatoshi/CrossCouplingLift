@@ -10,9 +10,9 @@
     REAL(8) :: Ia, Ib, Ic, force_lift
     real(8) :: kn_tmp, kn0
     integer :: InputStatus
-    character :: file_u*128, file_s*128, char_tmp*999
+    character :: file_u*128, file_s*128, char_tmp*999, char_accommo*128
     logical :: exists
-    namelist /nlist/ kn0, n_unit
+    namelist /nlist/ kn0, n_unit, accommo_IO
 
 !******************************************************************************************
       !PRINT*, 'ID for U and S'
@@ -39,9 +39,23 @@
       !print*, 'n_unit ?'
       !read(*,*) n_unit
       print*, n_unit
+    
+      !print*, 'accommo ?'
+      !read(*,*) accommo_IO
+      print*, accommo_IO
+
+      if (accommo_IO == 0.8d0) then
+        char_accommo = '0.8'
+      elseif (accommo_IO == 0.5d0) then
+        char_accommo = '0.5'
+      else
+        print*, 'Invalid value of the accommodation coefficient'
+        stop
+      endif
 
       WRITE(ID_u_char,*) n_unit
-      file_u = 'H:/work2/SPBGK/20220604_SPES20U1M/ID_list_summary_n'//TRIM(ADJUSTL(ID_u_char))//'.txt'
+      file_u = 'H:/work2/SPBGK/20220604_SPES20U1M/ID_list_summary_accommo'//TRIM(ADJUSTL(char_accommo))//&
+        &'_n'//TRIM(ADJUSTL(ID_u_char))//'.txt'
       inquire (file = file_u, exist = exists)
       if (.not. exists) then
         write (*,'(2a/)') ' >> cannot find file ', file_u
@@ -67,7 +81,8 @@
       close(10)
 
       WRITE(ID_s_char,*) n_unit
-      file_s = 'H:/work2/SPBGK/SPBGK20S1M/ID_list_summary_n'//TRIM(ADJUSTL(ID_s_char))//'.txt'
+      file_s = 'H:/work2/SPBGK/SPBGK20S1M/ID_list_summary_accommo'//TRIM(ADJUSTL(char_accommo))//&
+        &'_n'//TRIM(ADJUSTL(ID_s_char))//'.txt'
       inquire (file = file_s, exist = exists)
       if (.not. exists) then
         write (*,'(2a/)') ' >> cannot find file ', file_s

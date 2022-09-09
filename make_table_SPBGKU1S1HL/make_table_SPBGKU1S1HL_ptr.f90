@@ -18,7 +18,7 @@
                  ID_dsc_analyt_tmp, ID_dev_noneq_tmp
     real(8) :: force_lift_tmp, tmp
     !real(8) :: c1_tmp(0:1), c2_tmp(0:1), c3_tmp(0:1)
-    character :: name*10, name1*99, file*99, dir*99
+    character :: name*10, name1*99, file*99, dir*99, char_accommo*99
     !real(8) :: c1_pw_tmp, c2_pw_tmp, c3_pw_tmp, c_dev_tmp
     !integer :: n_posi_tmp
     INTEGER :: sz
@@ -26,12 +26,24 @@
 !    ALLOCATE(ID)
 !    PRINT*, ASSOCIATED(ID)
     
+    print*, 'accommo ?'
+    read(*,*) accommo_IO
+
+    if (accommo_IO == 0.8d0) then
+      char_accommo = '0.8'
+    elseif (accommo_IO == 0.5d0) then
+      char_accommo = '0.5'
+    else
+      print*, 'Invalid value of the accommodation coefficient'
+      stop
+    endif
+    
     print*, 'n_unit ?'
     read(*,*) n_unit
     write(ID_u_char,*) n_unit
-    
+
     dir = 'H:/work2/SPBGK/20220604_SPES20U1M/ID'
-    file = 'H:/work2/SPBGK/20220604_SPES20U1M/ID_list_n'//TRIM(ADJUSTL(ID_u_char))//'.txt'
+    file = 'H:/work2/SPBGK/20220604_SPES20U1M/ID_list_accommo'//TRIM(ADJUSTL(char_accommo))//'_n'//TRIM(ADJUSTL(ID_u_char))//'.txt'
     !file = 'ID_list.txt'
     
     n_ID = 0
@@ -219,7 +231,7 @@
 
     !name = 'ID_list_summary.txt'
     
-    name = 'ID_list_summary_n'//TRIM(ADJUSTL(ID_u_char))//'.txt'
+    name = 'ID_list_summary_accommo'//trim(adjustl(accommo_char))//'_n'//TRIM(ADJUSTL(ID_u_char))//'.txt'
 
     !    WRITE(*,*) 'Data written to ...', TRIM(name)
     OPEN(UNIT=10, STATUS='unknown', FILE=name)
